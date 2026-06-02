@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - School Management System</title>
+    <link rel="icon" type="image/x-icon" href="https://via.placeholder.com/32">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Welcome Page Styles */
+        .main {
+            position: relative;
+            background-image: url('assets/img/students.jpg');
+            /* background: transparent; */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        .main::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.75) 100%);
+            z-index: 1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .workspace {
+            position: relative;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 !important;
+        }
+
+        .welcome-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            padding: 2rem;
+            margin: auto;
+            color: var(--white);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .welcome-badge {
+            background: rgba(37, 99, 235, 0.2);
+            color: #60A5FA;
+            padding: 0.5rem 1rem;
+            border-radius: 99px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin: 0;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .welcome-description {
+            font-size: 1.25rem;
+            color: #E2E8F0;
+            max-width: 650px;
+            margin: 0 auto;
+            line-height: 1.6;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .welcome-actions {
+            display: flex;
+            gap: 1.25rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn-welcome {
+            padding: 1rem 2.5rem;
+            font-size: 1.125rem;
+            border-radius: 0.75rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 600;
+        }
+
+        .btn-welcome-primary {
+            background-color: var(--primary);
+            color: var(--white);
+            box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.5);
+        }
+
+        .btn-welcome-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.6);
+        }
+
+        .btn-welcome-secondary {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-welcome-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .welcome-footer {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            padding: 2rem;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #CBD5E1;
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 640px) {
+            .welcome-content {
+                padding: 1.5rem;
+                background-color: white
+            }
+
+            .welcome-title {
+                font-size: 2.25rem;
+            }
+
+            .welcome-description {
+                font-size: 1.125rem;
+            }
+
+            .welcome-actions {
+                flex-direction: column;
+                width: 100%;
+                padding: 0 1rem;
+            }
+
+            .btn-welcome {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .welcome-footer {
+                flex-direction: column;
+                gap: 0.75rem;
+                text-align: center;
+                padding-bottom: 2.5rem;
+            }
+        }
+
+        /* Sidebar Redesign Styles */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2.5rem 1.5rem;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+        }
+
+        .sidebar-welcome-title {
+            color: var(--white);
+            font-size: 1.125rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            line-height: 1.4;
+            margin-bottom: 3rem;
+            max-width: 180px;
+        }
+
+        .sidebar-illustration-container {
+            width: 100%;
+            padding: 0 0.5rem;
+            flex-grow: 1;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        .sidebar-illustration {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            border-radius: 1.25rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transition: transform 0.4s ease;
+            filter: brightness(0.9);
+        }
+
+        .sidebar-illustration:hover {
+            transform: translateY(-5px);
+            filter: brightness(1);
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar {
+                padding: 2rem 1rem;
+            }
+
+            .sidebar-welcome-title {
+                margin-bottom: 2rem;
+                font-size: 1rem;
+            }
+
+            .sidebar-illustration {
+                max-width: 160px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2 class="sidebar-welcome-title">SMS </h2>
+
+            <div class="sidebar-illustration-container">
+                <img src="assets/img/student.jpg" alt="Education Illustration" class="sidebar-illustration">
+
+            </div>
+            <h2 class="sidebar-welcome-title">The Smart School Management System</h2>
+
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="main">
+
+
+            <!-- Page Content -->
+            <main class="content">
+                <!-- Workspace Container -->
+                <div class="workspace animate-fade-in">
+
+                    <div class="welcome-content">
+                        <div class="welcome-badge">Welcome</div>
+                        <h1 class="welcome-title">Smart School Management System</h1>
+                        <!-- <p class="welcome-description">
+                            Empowering educational institutions with a comprehensive platform for academic excellence, administrative efficiency, and student success.
+                        </p>
+                         -->
+                        <div class="welcome-actions">
+                            <a href="registration.html" class="btn-welcome btn-welcome-primary">
+                                <i data-lucide="user-plus"></i>
+                                <span>Get Started</span>
+                            </a>
+                            <a href="portal.html" class="btn-welcome btn-welcome-secondary">
+                                <i data-lucide="layout"></i>
+                                <span>View Portal</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <footer class="welcome-footer">
+                        <div class="copyright">
+                            © 2026 School Management System. All rights reserved.
+                        </div>
+                        <div class="system-info">
+                            System Version 1.0.0
+                        </div>
+                    </footer>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
