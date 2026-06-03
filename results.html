@@ -4,15 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>School Fees & Ledger - School Management System</title>
+    <title>Examination Results - School Management System</title>
+    <!-- Favicon placeholder -->
     <link rel="icon" type="image/x-icon" href="https://via.placeholder.com/32">
+    <!-- Fonts -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body>
 
     <div class="wrapper">
+        <!-- Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-header">
                 <div class="sidebar-logo">
@@ -41,13 +45,13 @@
                     </a>
                 </div>
                 <div class="nav-item">
-                    <a href="results.html" class="nav-link">
+                    <a href="results.html" class="nav-link active">
                         <i data-lucide="clipboard-list"></i>
                         <span>Results</span>
                     </a>
                 </div>
                 <div class="nav-item">
-                    <a href="fees.html" class="nav-link active">
+                    <a href="fees.html" class="nav-link">
                         <i data-lucide="credit-card"></i>
                         <span>Fees</span>
                     </a>
@@ -68,13 +72,16 @@
             </nav>
         </aside>
 
+        <!-- Main Content Area -->
         <div class="main">
+            <!-- Header -->
             <header class="header">
                 <div class="header-left">
                     <button class="menu-toggle" id="menuToggle">
                         <i data-lucide="menu"></i>
                     </button>
                     <h1>SCHOOL MANAGEMENT SYSTEM </h1>
+
                 </div>
 
                 <div class="header-right">
@@ -96,11 +103,13 @@
                 </div>
             </header>
 
+            <!-- Page Content -->
             <main class="content">
                 <div class="page-header">
-                    <h1 class="page-title">School Fees & Ledger</h1>
+                    <h1 class="page-title">Examination Results</h1>
                 </div>
 
+                <!-- Empty White Content Container -->
                 <div class="workspace animate-fade-in">
                     <!-- Blank workspace area for future modules -->
                 </div>
@@ -108,8 +117,10 @@
         </div>
     </div>
 
+    <!-- Scripts -->
     <script src="assets/js/main.js"></script>
     <script>
+        // Initialize Lucide Icons
         lucide.createIcons();
     </script>
 </body>
