@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Examination Results - School Management System</title>
+    <title>Results Management - School Management System</title>
     <!-- Favicon placeholder -->
     <link rel="icon" type="image/x-icon" href="https://via.placeholder.com/32">
     <!-- Fonts -->
@@ -68,7 +68,7 @@
                         <span>Portal</span>
                     </a>
                 </div>
-               
+
             </nav>
         </aside>
 
@@ -106,12 +106,404 @@
             <!-- Page Content -->
             <main class="content">
                 <div class="page-header">
-                    <h1 class="page-title">Examination Results</h1>
+                    <h1 class="page-title">Results Management</h1>
                 </div>
 
                 <!-- Empty White Content Container -->
+                <!-- Results Management Workspace -->
+                <!-- Results Management Workspace -->
                 <div class="workspace animate-fade-in">
-                    <!-- Blank workspace area for future modules -->
+                    <style>
+                        .workspace-inner {
+                            padding: 2rem;
+                            display: flex;
+                            flex-direction: column;
+                            gap: 2rem;
+                        }
+
+                        /* Common Card Styling (Matching Project Style) */
+                        .results-card {
+                            background-color: var(--card-bg);
+                            border-radius: 0.75rem;
+                            border: 1px solid var(--border);
+                            padding: 1.5rem;
+                            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+                        }
+
+                        .card-title {
+                            font-size: 1rem;
+                            font-weight: 600;
+                            color: var(--text-main);
+                            margin-bottom: 1.25rem;
+                            padding-bottom: 0.75rem;
+                            border-bottom: 1px solid var(--border);
+                            display: flex;
+                            align-items: center;
+                            gap: 0.5rem;
+                        }
+
+                        /* Section 1: Search */
+                        .search-section {
+                            max-width: 600px;
+                        }
+
+                        .search-box-container {
+                            position: relative;
+                        }
+
+                        .search-box-container i {
+                            position: absolute;
+                            left: 1rem;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            color: var(--text-muted);
+                            pointer-events: none;
+                        }
+
+                        .search-box-container input {
+                            padding-left: 2.75rem !important;
+                        }
+
+                        /* Section 2: Student Info */
+                        .info-display-grid {
+                            display: grid;
+                            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                            gap: 1.5rem;
+                        }
+
+                        .display-group {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 0.25rem;
+                        }
+
+                        .display-label {
+                            font-size: 0.75rem;
+                            font-weight: 600;
+                            color: var(--text-muted);
+                            text-transform: uppercase;
+                            letter-spacing: 0.025em;
+                        }
+
+                        .display-value {
+                            font-size: 1rem;
+                            font-weight: 500;
+                            color: var(--text-main);
+                            padding: 0.5rem 0;
+                        }
+
+                        /* Section 3: Entry Form */
+                        .form-grid {
+                            display: grid;
+                            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                            gap: 1.5rem;
+                            align-items: flex-end;
+                        }
+
+                        .form-group {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 0.5rem;
+                        }
+
+                        .form-group label {
+                            font-size: 0.875rem;
+                            font-weight: 500;
+                            color: var(--text-main);
+                        }
+
+                        #save_result_btn {
+                            background-color: #4169E1;
+                            /* Royal Blue */
+                            color: white;
+                            font-weight: 600;
+                            height: 42px;
+                            border: none;
+                            border-radius: 0.5rem;
+                            padding: 0 1.5rem;
+                            cursor: pointer;
+                            transition: background-color 0.2s;
+                            display: inline-flex;
+                            align-items: center;
+                            justify-content: center;
+                            gap: 0.5rem;
+                        }
+
+                        #save_result_btn:hover {
+                            background-color: #3152B1;
+                        }
+
+                        /* Section 4: Table */
+                        .table-responsive {
+                            width: 100%;
+                            overflow-x: auto;
+                        }
+
+                        .results-data-table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            text-align: left;
+                        }
+
+                        .results-data-table th {
+                            background-color: #F8FAFC;
+                            padding: 1rem;
+                            font-size: 0.875rem;
+                            font-weight: 600;
+                            color: var(--text-muted);
+                            border-bottom: 2px solid var(--border);
+                        }
+
+                        .results-data-table td {
+                            padding: 1rem;
+                            font-size: 0.875rem;
+                            border-bottom: 1px solid var(--border);
+                            color: var(--text-main);
+                        }
+
+                        .results-data-table tr:hover {
+                            background-color: #F1F5F9;
+                        }
+
+                        .mark-badge {
+                            background: #E0F2FE;
+                            color: #0369A1;
+                            padding: 0.25rem 0.625rem;
+                            border-radius: 9999px;
+                            font-weight: 600;
+                            font-size: 0.75rem;
+                        }
+
+                        .edit-action {
+                            color: var(--primary);
+                            text-decoration: none;
+                            font-weight: 600;
+                            font-size: 0.875rem;
+                            display: inline-flex;
+                            align-items: center;
+                            gap: 0.25rem;
+                        }
+
+                        .edit-action:hover {
+                            text-decoration: underline;
+                        }
+
+                        .search-container {
+                            display: flex;
+                            align-items: center;
+                            width: 100%;
+                            max-width: 500px;
+                            margin: 0 auto;
+                        }
+
+                        .search-container input {
+                            flex: 1;
+                            padding: 0.75rem 1rem;
+                            border: 1px solid var(--border);
+                            border-right: none;
+                            border-radius: 0.5rem 0 0 0.5rem;
+                            background-color: var(--white);
+                            color: var(--text-main);
+                            font-size: 0.875rem;
+                            transition: border-color 0.2s;
+                            outline: none;
+                        }
+
+                        .search-container input:focus {
+                            border-color: var(--primary);
+                        }
+
+                        .search-btn {
+                            flex-shrink: 0;
+                            color: var(--text-muted);
+                            background-color: #F1F5F9;
+                            width: 46px;
+                            height: 42px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            border-radius: 0 0.5rem 0.5rem 0;
+                            cursor: pointer;
+                            border: 1px solid var(--border);
+                            transition: all 0.2s ease;
+                        }
+
+                        .search-btn:hover {
+                            background-color: #E2E8F0;
+                            color: var(--primary);
+                        }
+
+                        .search-btn i,
+                        .search-btn svg {
+                            width: 16px;
+                            height: 16px;
+                            display: flex;
+                        }
+                    </style>
+
+                    <div class="workspace-inner">
+                        <!-- SECTION 1: SEARCH STUDENT -->
+                        <div class="search-container">
+                            <input type="text" id="search_student" placeholder="Search by Student ID or Name...">
+                            <button class="search-btn" type="button" id="search_submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                            </button>
+                        </div>
+                        <!-- SECTION 2: STUDENT INFORMATION CARD -->
+                        <div class="results-card">
+                            <div class="card-title">
+                                <i data-lucide="user" style="width: 18px;"></i>
+                                Student Information
+                            </div>
+                            <div class="info-display-grid">
+                                <div class="display-group">
+                                    <span class="display-label">Student Name</span>
+                                    <span id="selected_student_name" class="display-value">Samuel Adriko</span>
+                                </div>
+                                <div class="display-group">
+                                    <span class="display-label">Class</span>
+                                    <span id="selected_student_class" class="display-value">Senior S6</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SECTION 3: RESULT ENTRY FORM -->
+                        <div class="results-card">
+                            <div class="card-title">
+                                <!-- <i data-lucide="edit-3" style="width: 18px;"></i> -->
+                                Enter Results
+                            </div>
+                            <form class="result-entry-form" onsubmit="return false;">
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="subject_name">Subject</label>
+                                        <select id="subject_name" class="form-control">
+                                            <option value="" disabled selected>Select Subject</option>
+                                            <option value="Mathematics">Mathematics</option>
+                                            <option value="English">English</option>
+                                            <option value="Science">Science</option>
+                                            <option value="Social Studies">Social Studies</option>
+                                            <option value="Physics">Physics</option>
+                                            <option value="Chemistry">Chemistry</option>
+                                            <option value="Biology">Biology</option>
+                                            <option value="History">History</option>
+                                            <option value="Geography">Geography</option>
+                                            <option value="Kiswahili">Kiswahili</option>
+                                            <option value="Religious Education">Religious Education</option>
+                                            <option value="Computer Studies">Computer Studies</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="term_name">Term</label>
+                                        <select id="term_name" class="form-control">
+                                            <option value="" disabled selected>Select Term</option>
+                                            <option value="Term 1">Term 1</option>
+                                            <option value="Term 2">Term 2</option>
+                                            <option value="Term 3">Term 3</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="marks_obtained">Mark (0-100)</label>
+                                        <input type="number" id="marks_obtained" class="form-control" min="0" max="100"
+                                            placeholder="Enter Mark">
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="button" id="save_result_btn">
+                                            <i data-lucide="save" style="width: 16px;"></i>
+                                            Save Result
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- SECTION 4: EXISTING RESULTS TABLE -->
+                        <div class="results-card">
+                            <div class="card-title">
+                                Existing Results
+                            </div>
+                            <div class="table-responsive">
+                                <table id="existing_results_table" class="results-data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Subject</th>
+                                            <th>Term</th>
+                                            <th>Mark</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="font-weight: 500;">Mathematics</td>
+                                            <td>Term 1</td>
+                                            <td><span class="mark-badge">82</span></td>
+                                            <td>
+                                                <a href="#" class="edit-action">
+                                                    <i data-lucide="edit" style="width: 14px;"></i>
+                                                    Edit
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight: 500;">English</td>
+                                            <td>Term 1</td>
+                                            <td><span class="mark-badge">67</span></td>
+                                            <td>
+                                                <a href="#" class="edit-action">
+                                                    <i data-lucide="edit" style="width: 14px;"></i>
+                                                    Edit
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight: 500;">Biology</td>
+                                            <td>Term 1</td>
+                                            <td><span class="mark-badge">78</span></td>
+                                            <td>
+                                                <a href="#" class="edit-action">
+                                                    <i data-lucide="edit" style="width: 14px;"></i>
+                                                    Edit
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight: 500;">History</td>
+                                            <td>Term 1</td>
+                                            <td><span class="mark-badge">90</span></td>
+                                            <td>
+                                                <a href="#" class="edit-action">
+                                                    <i data-lucide="edit" style="width: 14px;"></i>
+                                                    Edit
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight: 500;">Mathematics</td>
+                                            <td>Term 1</td>
+                                            <td><span class="mark-badge">78</span></td>
+                                            <td>
+                                                <a href="#" class="edit-action">
+                                                    <i data-lucide="edit" style="width: 14px;"></i>
+                                                    Edit
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight: 500;">English</td>
+                                            <td>Term 1</td>
+                                            <td><span class="mark-badge">82</span></td>
+                                            <td>
+                                                <a href="#" class="edit-action">
+                                                    <i data-lucide="edit" style="width: 14px;"></i>
+                                                    Edit
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </main>
         </div>

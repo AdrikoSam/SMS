@@ -64,7 +64,7 @@
                         <span>Portal</span>
                     </a>
                 </div>
-                
+
             </nav>
         </aside>
 
@@ -102,7 +102,215 @@
                 </div>
 
                 <div class="workspace animate-fade-in">
-                    <!-- Blank workspace area for future modules -->
+                    <style>
+                        .workspace-inner {
+                            padding: 2rem;
+                            display: flex;
+                            flex-direction: column;
+                            gap: 2rem;
+                        }
+
+                        /* Common Card Styling (Matching Project Style) */
+                        .results-card {
+                            background-color: var(--card-bg);
+                            border-radius: 0.75rem;
+                            border: 1px solid var(--border);
+                            padding: 1.5rem;
+                            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+                        }
+
+                        .card-title {
+                            font-size: 1rem;
+                            font-weight: 600;
+                            color: var(--text-main);
+                            margin-bottom: 1.25rem;
+                            padding-bottom: 0.75rem;
+                            border-bottom: 1px solid var(--border);
+                            display: flex;
+                            align-items: center;
+                            gap: 0.5rem;
+                        }
+
+                        /* Section 1: Info Display Grid */
+                        .info-display-grid {
+                            display: grid;
+                            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                            gap: 1.5rem;
+                        }
+
+                        .display-group {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 0.25rem;
+                        }
+
+                        .display-label {
+                            font-size: 0.75rem;
+                            font-weight: 600;
+                            color: var(--text-muted);
+                            text-transform: uppercase;
+                            letter-spacing: 0.025em;
+                        }
+
+                        .display-value {
+                            font-size: 1.125rem;
+                            font-weight: 600;
+                            color: var(--text-main);
+                            padding: 0.25rem 0;
+                        }
+
+                        /* Section 2: KPI Grid */
+                        .kpi-grid {
+                            display: grid;
+                            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                            gap: 1.5rem;
+                        }
+
+                        .kpi-card {
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: flex-start;
+                        }
+
+                        .kpi-value-large {
+                            font-size: 2.5rem;
+                            font-weight: 700;
+                            color: var(--primary);
+                            margin-top: 0.5rem;
+                        }
+
+                        .kpi-details {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 1.25rem;
+                            margin-top: 0.5rem;
+                        }
+
+                        /* Section 3: Table Styling */
+                        .table-responsive {
+                            width: 100%;
+                            overflow-x: auto;
+                        }
+
+                        .results-data-table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            text-align: left;
+                        }
+
+                        .results-data-table th {
+                            background-color: #F8FAFC;
+                            padding: 1rem;
+                            font-size: 0.875rem;
+                            font-weight: 600;
+                            color: var(--text-muted);
+                            border-bottom: 2px solid var(--border);
+                        }
+
+                        .results-data-table td {
+                            padding: 1rem;
+                            font-size: 0.875rem;
+                            border-bottom: 1px solid var(--border);
+                            color: var(--text-main);
+                        }
+
+                        .results-data-table tr:hover {
+                            background-color: #F1F5F9;
+                        }
+
+                        .mark-badge {
+                            background: #E0F2FE;
+                            color: #0369A1;
+                            padding: 0.25rem 0.625rem;
+                            border-radius: 9999px;
+                            font-weight: 600;
+                            font-size: 0.75rem;
+                        }
+                    </style>
+
+                    <div class="workspace-inner">
+                        <!-- SECTION 1: PROFILE CARD -->
+                        <div class="results-card">
+                            <div class="card-title">
+                                Student Profile
+                            </div>
+                            <div class="info-display-grid">
+                                <div class="display-group">
+                                    <span class="display-label">Student Name</span>
+                                    <span id="display_student_name" class="display-value">Adriko Samuel</span>
+                                </div>
+                                <div class="display-group">
+                                    <span class="display-label">Class</span>
+                                    <span id="display_class_level" class="display-value">Senior 6</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SECTION 2: KPI SUMMARY BOXES -->
+                        <div class="kpi-grid">
+                            <!-- LEFT KPI CARD -->
+                            <div class="results-card kpi-card">
+                                <div class="card-title">
+                                    Attendance Progress
+                                </div>
+                                <div id="display_attendance_percent" class="kpi-value-large">94%</div>
+                            </div>
+
+                            <!-- RIGHT KPI CARD -->
+                            <div class="results-card kpi-card">
+                                <div class="card-title">
+                                    Financial Status
+                                </div>
+                                <div class="kpi-details">
+                                    <div class="display-group">
+                                        <span class="display-label">Total Owed</span>
+                                        <span id="display_total_owed" class="display-value" style="color: #EF4444;">UGX
+                                            150,000</span>
+                                    </div>
+                                    <div class="display-group">
+                                        <span class="display-label">Total Paid</span>
+                                        <span id="display_total_paid" class="display-value" style="color: #10B981;">UGX
+                                            450,000</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SECTION 3: REPORT CARD TABLE -->
+                        <div class="results-card">
+                            <div class="card-title">
+                                Academic Report Card
+                            </div>
+                            <div class="table-responsive">
+                                <table id="parent_results_table" class="results-data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Subject Name</th>
+                                            <th>Academic Term</th>
+                                            <th>Numerical Mark</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="font-weight: 500;">Mathematics</td>
+                                            <td>Term 1</td>
+                                            <td><span class="mark-badge">78</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight: 500;">English</td>
+                                            <td>Term 1</td>
+                                            <td><span class="mark-badge">82</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight: 500;">Science</td>
+                                            <td>Term 1</td>
+                                            <td><span class="mark-badge">65</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </main>
         </div>
